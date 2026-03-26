@@ -2,6 +2,38 @@
 
 Local-first monorepo: a **Next.js** patient chat UI talks to a **FastAPI** backend for session state, provider matching, mock scheduling, notifications (mocked or live), and voice handoff payloads.
 
+## Running without API keys (for interviewers)
+
+**No API keys are required to run a full demo.** Every external service has a built-in mock fallback:
+
+| Feature | Without keys | With keys |
+|---------|-------------|-----------|
+| Chat / AI responses | Mock rules-based orchestrator (fast, deterministic) | GPT-4o-mini via `OPENAI_API_KEY` |
+| Email confirmation | Logged to backend console (no real email sent) | Real email via `RESEND_API_KEY` |
+| SMS confirmation | Mock success returned | Real SMS via `TEXTBELT_API_KEY` or Twilio |
+| Voice handoff | Demo mode — returns structured context, no call placed | Live outbound call via Vapi (`VAPI_*` keys) |
+
+**Quick start (zero config):**
+
+```bash
+# Backend
+cd backend
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env          # leave all values blank — mocks kick in automatically
+uvicorn main:app --reload --host 127.0.0.1 --port 8000
+
+# Frontend (new terminal)
+cd frontend
+npm install
+npm run dev
+```
+
+Open **http://localhost:3000** — the full scheduling, refill, and office-info flows work immediately.
+Add `OPENAI_API_KEY` to `backend/.env` for real GPT responses; add Resend/Textbelt/Vapi keys to enable live notifications and voice calls.
+
+---
+
 ## Architecture (interview-friendly)
 
 | Layer | Responsibility |
