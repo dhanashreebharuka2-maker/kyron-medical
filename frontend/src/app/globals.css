@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #e0f2fe;
+  --blob1: rgba(14, 165, 233, 0.22);
+  --blob2: rgba(99, 102, 241, 0.14);
+  --blob3: rgba(56, 189, 248, 0.12);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  color: #0f172a;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% 0%, var(--blob1), transparent 55%),
+    radial-gradient(ellipse 700px 450px at 85% 15%, var(--blob2), transparent 50%),
+    radial-gradient(ellipse 600px 400px at 50% 100%, var(--blob3), transparent 55%),
+    linear-gradient(165deg, #f8fafc 0%, #e0f2fe 35%, #f1f5f9 70%, #f8fafc 100%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(14, 165, 233, 0.25);
+}
